@@ -5,5 +5,5 @@
 !Xianxia/
 !Xianxia/**
 
-.env
+Xianxia/.env
 *.env
