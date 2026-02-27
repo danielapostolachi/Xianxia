@@ -1,8 +1,8 @@
 import random
 
 from Xianxia.character import Character
-from Xianxia.iaspect import IAspect
-from Xianxia.iconduit import IConduit
+from Xianxia.AspectLogic.iaspect import IAspect
+from Xianxia.ConduitLogic.iconduit import IConduit
 
 
 class Player(Character):
