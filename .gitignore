@@ -2,3 +2,10 @@
 *
 .env
 *.env
+
+# but don’t ignore my packages
+!Xianxia/
+!Xianxia/AspectLogic/
+!Xianxia/AspectLogic/__init__.py
+!Xianxia/ConduitLogic/
+!Xianxia/ConduitLogic/__init__.py
