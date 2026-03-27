@@ -1,91 +1,76 @@
-from abc import ABC, abstractmethod
+# ==============================
+# FLYWEIGHT (Shared data)
+# ==============================
+class EnemyType:
+    def __init__(self, name, base_hp, texture):
+        self.name = name
+        self.base_hp = base_hp
+        self.texture = texture
 
-# Product A
-class IPayment(ABC):
-    @abstractmethod
-    def pay(self):
-        pass
-
-
-# Product B
-class IReceipt(ABC):
-    @abstractmethod
-    def download(self):
-        pass
+    def render(self, x, y):
+        print(f"[Render] {self.name} at ({x}, {y}) using {self.texture}")
 
 
-# Concrete Products - Stripe
-class StripePayment(IPayment):
-    def pay(self):
-        print("Stripe Pay")
+# ==============================
+# FLYWEIGHT FACTORY (Cache)
+# ==============================
+class EnemyFactory:
+    _types = {}
+
+    @classmethod
+    def get_enemy_type(cls, name):
+        if name not in cls._types:
+            print(f"[Factory] Creating new enemy type: {name}")
+            if name == "orc":
+                cls._types[name] = EnemyType("orc", 100, "orc.png")
+            elif name == "elf":
+                cls._types[name] = EnemyType("elf", 70, "elf.png")
+            else:
+                cls._types[name] = EnemyType(name, 50, "default.png")
+
+        return cls._types[name]
 
 
-class StripeReceipt(IReceipt):
-    def download(self):
-        print("Stripe Download")
+# ==============================
+# CONTEXT OBJECT (uses flyweight)
+# ==============================
+class Enemy:
+    def __init__(self, enemy_type, x, y):
+        self.type = enemy_type  # shared
+        self.x = x              # unique
+        self.y = y              # unique
+        self.hp = enemy_type.base_hp  # copied but could be extrinsic too
+
+    def render(self):
+        self.type.render(self.x, self.y)
+
+    def take_damage(self, dmg):
+        self.hp -= dmg
+        print(f"[Enemy] {self.type.name} HP = {self.hp}")
 
 
-# Concrete Products - Crypto
-class CryptoPayment(IPayment):
-    def pay(self):
-        print("Crypto Pay")
+# ==============================
+# GAME SIMULATION
+# ==============================
+def main():
+    enemies = []
+
+    # Creating many enemies of same type
+    for i in range(5):
+        enemy_type = EnemyFactory.get_enemy_type("orc")
+        enemies.append(Enemy(enemy_type, x=i * 10, y=0))
+
+    # Creating different type
+    elf_type = EnemyFactory.get_enemy_type("elf")
+    enemies.append(Enemy(elf_type, x=50, y=20))
+
+    print("\n--- Rendering ---")
+    for e in enemies:
+        e.render()
+
+    print("\n--- Damage ---")
+    enemies[0].take_damage(20)
 
 
-class CryptoReceipt(IReceipt):
-    def download(self):
-        print("Crypto Download")
-
-
-# Abstract Factory
-class IPaymentFactory(ABC):
-    @abstractmethod
-    def create_payment(self):
-        pass
-
-    @abstractmethod
-    def create_receipt(self):
-        pass
-
-
-# Concrete Factory 1
-class StripeFactory(IPaymentFactory):
-    def create_payment(self):
-        return StripePayment()
-
-    def create_receipt(self):
-        return StripeReceipt()
-
-
-# Concrete Factory 2
-class CryptoFactory(IPaymentFactory):
-    def create_payment(self):
-        return CryptoPayment()
-
-    def create_receipt(self):
-        return CryptoReceipt()
-
-
-# Client
-class Checkout:
-    def __init__(self, factoryabs: IPaymentFactory):
-        self._payment = factoryabs.create_payment()
-        self._receipt = factoryabs.create_receipt()
-
-    def process(self):
-        self._payment.pay()
-        self._receipt.download()
-
-
-# Main
 if __name__ == "__main__":
-    # Select Stripe family
-    factory = StripeFactory()
-    checkout = Checkout(factory)
-    checkout.process()
-
-    print()
-
-    # Switch to Crypto family
-    factory = CryptoFactory()
-    checkout = Checkout(factory)
-    checkout.process()
+    main()

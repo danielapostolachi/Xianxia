@@ -16,3 +16,7 @@ class Player(Character):
         ability = random.choice(self._repertoire)
         damage = random.randint(1, 20)
         return ability, damage
+
+    @property
+    def conduit(self):
+        return self._conduit
