@@ -1,6 +1,10 @@
 from abc import ABC, abstractmethod
-from Xianxia.ConduitLogic.conduit import PhysicalConduit, SorceryConduit, FusionConduit
+
+from Xianxia.ConduitLogic.fusionconduit import FusionConduit
 from Xianxia.ConduitLogic.iconduit import IConduit
+from Xianxia.ConduitLogic.physicalconduit import PhysicalConduit
+from Xianxia.ConduitLogic.sorceryconduit import SorceryConduit
+
 
 class ConduitFactory(ABC):
     @abstractmethod

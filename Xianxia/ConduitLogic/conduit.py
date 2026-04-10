@@ -11,16 +11,14 @@ class Conduit(IConduit):
     def get_name(self) -> str:
         return self._name
 
-class PhysicalConduit(Conduit):
-    def __init__(self, name: str):
-        super().__init__(name, "Physical")
+    # Default behavior (can be overridden)
+    def deal_damage(self, attacker, target) -> float:
+        return attacker.attack
 
-class SorceryConduit(Conduit):
-    def __init__(self, name: str):
-        super().__init__(name, "Sorcery")
+    def apply_effect(self, attacker, target):
+        pass
 
-class FusionConduit(Conduit):
-    def __init__(self, name: str):
-        super().__init__(name, "Fusion")
+    def break_shield(self, target):
+        pass
 
 
