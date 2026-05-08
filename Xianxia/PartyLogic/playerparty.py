@@ -1,5 +1,11 @@
+from Xianxia.PartyLogic.partyiterator import PartyIterator
+
+
 class PlayerParty:
     MAX_MEMBERS = 4
+
+    def __iter__(self):
+        return PartyIterator(self.members)
 
     def __init__(self, name=None, members=None, leader=None):
         self.name = name or "Unnamed Party"
