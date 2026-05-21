@@ -1,0 +1,45 @@
+{
+  "id": "sou",
+  "name": "Sou",
+  "hp": 1000,
+  "conduit": "physical",
+  "speed": 12,
+  "aspect": "Creativity",
+  "aspect_category": "Utility",
+  "crit_rate": 20,
+  "na": {
+    "name": "Sword Strike",
+    "description": "A swift sword strike against a single target. Converts to AOE if Firework is active.",
+    "conduit": "physical",
+    "targeting": "single",
+    "cooldown": 0,
+    "is_true_damage": false,
+    "effect_hook": "sword_strike"
+  },
+  "skill": {
+    "name": "Firework",
+    "description": "Launches a firework that applies DOT and Disorientation. Converts NA to AOE.",
+    "conduit": "physical",
+    "targeting": "single",
+    "cooldown": 2,
+    "is_true_damage": false,
+    "effect_hook": "firework"
+  },
+  "ult": {
+    "name": "Electric Slash",
+    "description": "AOE electric slash. Damage multiplied if Firework is active on targets.",
+    "conduit": "physical",
+    "targeting": "aoe",
+    "is_true_damage": false,
+    "effect_hook": "electric_slash"
+  },
+  "passive_1": {
+    "name": "High Voltage",
+    "description": "Ult gains 1.5x multiplier when Firework condition is active on targets.",
+    "conduit": "none",
+    "targeting": "none",
+    "effect_hook": "high_voltage"
+  },
+  "talent": null,
+  "passive_2": null
+}

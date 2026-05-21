@@ -2,8 +2,11 @@
 # ignore everything by default
 *
 
+!main.py
 !Xianxia/
 !Xianxia/**
+Xianxia/Mess/
+Xianxia/Mess/**
 
-Xianxia/.env
+.env
 *.env

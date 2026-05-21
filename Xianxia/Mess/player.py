@@ -1,0 +1,22 @@
+import random
+
+from Xianxia.Mess.character import Character
+from Xianxia.Mess.AspectLogic.iaspect import IAspect
+from MessTwo.ConduitLogic.iconduit import IConduit
+
+
+class Player(Character):
+    def __init__(self, name, hp, conduit: IConduit, aspect: IAspect, repertoire):
+        super().__init__(name, hp)
+        self._conduit = conduit
+        self._aspect = aspect
+        self._repertoire = repertoire
+
+    def attack(self):
+        ability = random.choice(self._repertoire)
+        damage = random.randint(1, 20)
+        return ability, damage
+
+    @property
+    def conduit(self):
+        return self._conduit

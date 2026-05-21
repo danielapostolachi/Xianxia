@@ -1,0 +1,69 @@
+{
+  "id": "tara_kane",
+  "name": "Tara Kane",
+  "hp": 800,
+  "conduit": "sorcery",
+  "speed": 10,
+  "crit_rate": 15,
+  "max_phases": 3,
+  "phase_thresholds": {
+    "2": 0.6,
+    "3": 0.3
+  },
+  "phase_abilities": {
+    "1": [
+      {
+        "name": "Needle Throw",
+        "description": "Throws a needle at a single target.",
+        "conduit": "sorcery",
+        "targeting": "single",
+        "phase": 1,
+        "trigger": "on_turn",
+        "is_true_damage": false,
+        "effect_hook": "needle_throw"
+      },
+      {
+        "name": "Summon Bees",
+        "description": "Summons 4 bees into the fight.",
+        "conduit": "none",
+        "targeting": "none",
+        "phase": 1,
+        "trigger": "on_turn",
+        "is_true_damage": false,
+        "effect_hook": "summon_bees"
+      }
+    ],
+    "2": [
+      {
+        "name": "Enrage",
+        "description": "All bees dead. Tara Kane enrages and applies DOT to all players.",
+        "conduit": "sorcery",
+        "targeting": "aoe",
+        "phase": 2,
+        "trigger": "on_turn",
+        "is_true_damage": false,
+        "effect_hook": "enrage"
+      }
+    ],
+    "3": [
+      {
+        "name": "Queen's Wrath",
+        "description": "Desperate AOE sorcery strike.",
+        "conduit": "sorcery",
+        "targeting": "aoe",
+        "phase": 3,
+        "trigger": "on_turn",
+        "is_true_damage": false,
+        "effect_hook": "queens_wrath"
+      }
+    ]
+  },
+  "passive": {
+    "name": "Hive Mind",
+    "description": "Reduces incoming damage while bees are alive.",
+    "conduit": "none",
+    "targeting": "none",
+    "trigger": "always",
+    "effect_hook": "hive_mind"
+  }
+}

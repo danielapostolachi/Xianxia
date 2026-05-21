@@ -1,0 +1,42 @@
+{
+  "id": "bee",
+  "name": "Bee",
+  "hp": 150,
+  "conduit": "sorcery",
+  "speed": 8,
+  "crit_rate": 10,
+  "phase_abilities": {
+    "1": [
+      {
+        "name": "Sting",
+        "description": "A quick sting.",
+        "conduit": "sorcery",
+        "targeting": "single",
+        "phase": 1,
+        "trigger": "on_turn",
+        "is_true_damage": false,
+        "effect_hook": "sting"
+      },
+      {
+        "name": "Frenzy",
+        "description": "Multiple stings in quick succession.",
+        "conduit": "sorcery",
+        "targeting": "single",
+        "phase": 1,
+        "trigger": "on_turn",
+        "is_true_damage": false,
+        "effect_hook": "frenzy"
+      },
+      {
+        "name": "Sacrifice",
+        "description": "One massive sting. Bee dies after.",
+        "conduit": "sorcery",
+        "targeting": "single",
+        "phase": 1,
+        "trigger": "on_turn",
+        "is_true_damage": false,
+        "effect_hook": "sacrifice"
+      }
+    ]
+  }
+}
